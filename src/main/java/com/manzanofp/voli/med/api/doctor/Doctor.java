@@ -15,9 +15,9 @@ public class Doctor {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String name;
     private String email;
+    private String cellphone;
     private String crm;
 
     @Enumerated(EnumType.STRING)
@@ -30,6 +30,7 @@ public class Doctor {
         this.name = data.name();
         this.crm = data.crm();
         this.email = data.email();
+        this.cellphone = data.cellphone();
         this.specialty = data.specialty();
         this.address = new Address(data.address());
     }

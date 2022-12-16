@@ -15,6 +15,9 @@ public record DataRegisterDoctor(
         @NotBlank
         @Email
         String email,
+
+        @NotBlank
+        String cellphone,
         @NotBlank
         @Pattern(regexp = "\\d{4,6}")
         String crm,
