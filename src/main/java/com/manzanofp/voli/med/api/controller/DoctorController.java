@@ -4,6 +4,7 @@ import com.manzanofp.voli.med.api.doctor.DataRegisterDoctor;
 import com.manzanofp.voli.med.api.doctor.Doctor;
 import com.manzanofp.voli.med.api.doctor.DoctorRepository;
 import jakarta.transaction.Transactional;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -19,7 +20,7 @@ public class DoctorController {
 
     @PostMapping
     @Transactional
-    public void register(@RequestBody DataRegisterDoctor data){
+    public void register(@RequestBody @Valid DataRegisterDoctor data){
     doctorRepository.save(new Doctor(data));
     }
 
