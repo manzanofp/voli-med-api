@@ -7,6 +7,8 @@ import com.manzanofp.voli.med.api.doctor.DoctorRepository;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -25,9 +27,10 @@ public class DoctorController {
     }
 
     @GetMapping
-    public List<DataListDoctor> listAll(){
-    return  doctorRepository.findAll().stream().map(DataListDoctor::new).toList();
+    public Page<DataListDoctor> list(Pageable pageable){
+    return  doctorRepository.findAll(pageable).map(DataListDoctor::new);
     }
+
 
 
 }
