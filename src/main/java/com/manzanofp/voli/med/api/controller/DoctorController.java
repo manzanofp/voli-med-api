@@ -1,14 +1,13 @@
 package com.manzanofp.voli.med.api.controller;
 
-import com.manzanofp.voli.med.api.doctor.DataListDoctor;
-import com.manzanofp.voli.med.api.doctor.DataRegisterDoctor;
-import com.manzanofp.voli.med.api.doctor.Doctor;
-import com.manzanofp.voli.med.api.doctor.DoctorRepository;
+import com.manzanofp.voli.med.api.doctor.*;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -20,8 +19,9 @@ public class DoctorController {
 
     @PostMapping
     @Transactional
-    public void register(@RequestBody @Valid DataRegisterDoctor data){
+    public ResponseEntity<?> register(@RequestBody @Valid DataRegisterDoctor data){
     doctorRepository.save(new Doctor(data));
+    return new ResponseEntity<>("Usuário criado com sucesso!", HttpStatus.CREATED);
     }
 
     @GetMapping
@@ -29,6 +29,12 @@ public class DoctorController {
     return  doctorRepository.findAll(pageable).map(DataListDoctor::new);
     }
 
+    @PutMapping
+    @Transactional
+    public void update(@RequestBody @Valid DataUpdateDoctor data){
+        var doctor = doctorRepository.getReferenceById(data.id());
+        doctor.updateInfo(data);
 
+    }
 
 }
