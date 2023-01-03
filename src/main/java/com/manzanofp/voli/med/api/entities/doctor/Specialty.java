@@ -1,4 +1,4 @@
-package com.manzanofp.voli.med.api.doctor;
+package com.manzanofp.voli.med.api.entities.doctor;
 
 public enum Specialty {
 

@@ -1,6 +1,6 @@
-package com.manzanofp.voli.med.api.doctor;
+package com.manzanofp.voli.med.api.entities.doctor;
 
-import com.manzanofp.voli.med.api.adress.DataAddress;
+import com.manzanofp.voli.med.api.entities.adress.DataAddress;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;

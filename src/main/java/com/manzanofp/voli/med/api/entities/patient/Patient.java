@@ -1,7 +1,6 @@
-package com.manzanofp.voli.med.api.patient;
+package com.manzanofp.voli.med.api.entities.patient;
 
-import com.manzanofp.voli.med.api.adress.Address;
-import com.manzanofp.voli.med.api.doctor.DataUpdateDoctor;
+import com.manzanofp.voli.med.api.entities.adress.Address;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;

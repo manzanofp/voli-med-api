@@ -1,4 +1,4 @@
-package com.manzanofp.voli.med.api.doctor;
+package com.manzanofp.voli.med.api.entities.doctor;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

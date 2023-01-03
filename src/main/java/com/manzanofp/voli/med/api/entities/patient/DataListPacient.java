@@ -1,4 +1,4 @@
-package com.manzanofp.voli.med.api.patient;
+package com.manzanofp.voli.med.api.entities.patient;
 
 public record DataListPacient(String name, String email, String cpf) {
 

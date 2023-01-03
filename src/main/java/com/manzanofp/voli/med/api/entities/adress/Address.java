@@ -1,4 +1,4 @@
-package com.manzanofp.voli.med.api.adress;
+package com.manzanofp.voli.med.api.entities.adress;
 
 import jakarta.persistence.Embeddable;
 import lombok.AllArgsConstructor;

@@ -1,4 +1,4 @@
-package com.manzanofp.voli.med.api.doctor;
+package com.manzanofp.voli.med.api.entities.doctor;
 
 public record DataListDoctor(Long id, String name, String email, String crm, Specialty specialty ) {
 

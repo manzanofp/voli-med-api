@@ -1,7 +1,7 @@
-package com.manzanofp.voli.med.api.doctor;
+package com.manzanofp.voli.med.api.entities.doctor;
 
 
-import com.manzanofp.voli.med.api.adress.Address;
+import com.manzanofp.voli.med.api.entities.adress.Address;
 import jakarta.persistence.*;
 import lombok.*;
 

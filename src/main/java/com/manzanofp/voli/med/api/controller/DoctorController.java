@@ -1,6 +1,9 @@
 package com.manzanofp.voli.med.api.controller;
 
-import com.manzanofp.voli.med.api.doctor.*;
+import com.manzanofp.voli.med.api.entities.doctor.*;
+import com.manzanofp.voli.med.api.entities.doctor.DataListDoctor;
+import com.manzanofp.voli.med.api.entities.doctor.Doctor;
+import com.manzanofp.voli.med.api.entities.doctor.DoctorRepository;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
