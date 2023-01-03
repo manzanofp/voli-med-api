@@ -6,9 +6,9 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
 
 
 @RestController
@@ -19,21 +19,25 @@ public class DoctorController {
 
     @PostMapping
     @Transactional
-    public ResponseEntity<?> register(@RequestBody @Valid DataRegisterDoctor data){
-    doctorRepository.save(new Doctor(data));
-    return new ResponseEntity<>("Doctor created sucessfully!", HttpStatus.CREATED);
+    public ResponseEntity<?> register(@RequestBody @Valid DataRegisterDoctor data, UriComponentsBuilder uriBuilder){
+    var doctor = new Doctor(data);
+    doctorRepository.save(doctor);
+    var uri = uriBuilder.path("/doctors/{id}").buildAndExpand(doctor.getId()).toUri();
+    return ResponseEntity.created(uri).body(new DataDoctorDetail(doctor));
     }
 
     @GetMapping
-    public Page<DataListDoctor> list(Pageable pageable){
-    return  doctorRepository.findAllByActiveTrue(pageable).map(DataListDoctor::new);
+    public ResponseEntity<Page<DataListDoctor>> list(Pageable pageable){
+    var page = doctorRepository.findAllByActiveTrue(pageable).map(DataListDoctor::new);
+    return ResponseEntity.ok(page);
     }
 
     @PutMapping
     @Transactional
-    public void update(@RequestBody @Valid DataUpdateDoctor data){
+    public ResponseEntity update(@RequestBody @Valid DataUpdateDoctor data){
         var doctor = doctorRepository.getReferenceById(data.id());
         doctor.updateInfo(data);
+        return ResponseEntity.ok(new DataDoctorDetail(doctor));
     }
 
     @DeleteMapping("/{id}")
@@ -41,6 +45,13 @@ public class DoctorController {
    public ResponseEntity<?> delete(@PathVariable Long id){
         var doctor = doctorRepository.getReferenceById(id);
         doctor.delete();
-        return new ResponseEntity<>("Doctor deleted!", HttpStatus.NOT_FOUND);
+        return ResponseEntity.noContent().build();
    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<?> details(@PathVariable Long id){
+        var doctor = doctorRepository.getReferenceById(id);
+        return ResponseEntity.ok(new DataDoctorDetail(doctor));
+    }
+
 }
