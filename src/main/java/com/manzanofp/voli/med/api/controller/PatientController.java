@@ -1,16 +1,15 @@
 package com.manzanofp.voli.med.api.controller;
 
 
-import com.manzanofp.voli.med.api.patient.DataListPacient;
-import com.manzanofp.voli.med.api.patient.DataRegisterPatient;
-import com.manzanofp.voli.med.api.patient.Patient;
-import com.manzanofp.voli.med.api.patient.PatientRepository;
+import com.manzanofp.voli.med.api.patient.*;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -26,8 +25,18 @@ public class PatientController {
     }
 
     @GetMapping
-    public Page<DataListPacient> list (@PageableDefault(page = 0, size = 10, sort = {"nome"})Pageable pageable){
+    public Page<DataListPacient> list (@PageableDefault(page = 0, size = 10, sort = {"name"})Pageable pageable){
         return patientRepository.findAll(pageable).map(DataListPacient::new);
     }
+
+    @PutMapping
+    @Transactional
+    public ResponseEntity<?> update (@RequestBody @Valid DataUpdatePatient data){
+        var patient = patientRepository.getReferenceById(data.id());
+        patient.updateInfo(data);
+        return new ResponseEntity<>("Update User!", HttpStatus.OK);
+    }
+
+
 
 }
