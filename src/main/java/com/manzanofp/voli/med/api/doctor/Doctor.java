@@ -26,7 +26,10 @@ public class Doctor {
     @Embedded
     private Address address;
 
+    private Boolean active;
+
     public Doctor(DataRegisterDoctor data) {
+        this.active = true;
         this.name = data.name();
         this.crm = data.crm();
         this.email = data.email();
@@ -45,5 +48,9 @@ public class Doctor {
         if (data.address() != null){
             this.address.updateAdressInfo(data.address());
         }
+    }
+
+    public void delete() {
+        this.active = false;
     }
 }

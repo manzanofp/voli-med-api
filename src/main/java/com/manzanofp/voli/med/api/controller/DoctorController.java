@@ -26,7 +26,7 @@ public class DoctorController {
 
     @GetMapping
     public Page<DataListDoctor> list(Pageable pageable){
-    return  doctorRepository.findAll(pageable).map(DataListDoctor::new);
+    return  doctorRepository.findAllByActiveTrue(pageable).map(DataListDoctor::new);
     }
 
     @PutMapping
@@ -34,7 +34,13 @@ public class DoctorController {
     public void update(@RequestBody @Valid DataUpdateDoctor data){
         var doctor = doctorRepository.getReferenceById(data.id());
         doctor.updateInfo(data);
-
     }
 
+    @DeleteMapping("/{id}")
+    @Transactional
+   public ResponseEntity<?> delete(@PathVariable Long id){
+        var doctor = doctorRepository.getReferenceById(id);
+        doctor.delete();
+        return new ResponseEntity<>("usuário deletado!!", HttpStatus.NOT_FOUND);
+   }
 }
