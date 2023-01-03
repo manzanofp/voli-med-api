@@ -21,7 +21,7 @@ public class DoctorController {
     @Transactional
     public ResponseEntity<?> register(@RequestBody @Valid DataRegisterDoctor data){
     doctorRepository.save(new Doctor(data));
-    return new ResponseEntity<>("User created sucessfully!", HttpStatus.CREATED);
+    return new ResponseEntity<>("Doctor created sucessfully!", HttpStatus.CREATED);
     }
 
     @GetMapping
@@ -41,6 +41,6 @@ public class DoctorController {
    public ResponseEntity<?> delete(@PathVariable Long id){
         var doctor = doctorRepository.getReferenceById(id);
         doctor.delete();
-        return new ResponseEntity<>("User deleted!", HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>("Doctor deleted!", HttpStatus.NOT_FOUND);
    }
 }

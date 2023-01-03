@@ -34,9 +34,14 @@ public class PatientController {
     public ResponseEntity<?> update (@RequestBody @Valid DataUpdatePatient data){
         var patient = patientRepository.getReferenceById(data.id());
         patient.updateInfo(data);
-        return new ResponseEntity<>("Update User!", HttpStatus.OK);
+        return new ResponseEntity<>("Update patient!", HttpStatus.OK);
     }
 
-
-
+    @DeleteMapping("/{id}")
+    @Transactional
+    public ResponseEntity<?> delete(@PathVariable Long id){
+        var patient = patientRepository.getReferenceById(id);
+        patient.delete();
+        return new ResponseEntity<>("Patient deleted!", HttpStatus.NOT_FOUND);
+    }
 }
